@@ -1,0 +1,16 @@
+services:
+  api:
+    build: ./server
+    env_file: ./server/.env
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+    restart: unless-stopped
+
+  web:
+    build: ./client
+    depends_on:
+      - api
+    ports:
+      - "127.0.0.1:8080:80"
+    restart: unless-stopped
